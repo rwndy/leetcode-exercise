@@ -26,7 +26,7 @@ function minOperations(nums: number[], k: number): number {
         const uniqueValues = [...new Set(current)].sort((a, b) => a - b);
         
         for (let i = uniqueValues.length - 1; i >= 0; i--) {
-            if (uniqueValues[i] <= k) continue; // Skip values <= k
+            if (uniqueValues[i] <= k) continue;
             
             for (let j = k; j < uniqueValues[i]; j++) {
            
