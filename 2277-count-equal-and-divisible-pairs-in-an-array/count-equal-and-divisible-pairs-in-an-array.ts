@@ -6,6 +6,7 @@ masalahnya di element array ini adakah element yg sama?
 
 function countPairs(nums: number[], k: number): number {
     const valueIndices: Map<number, number[]> = new Map();
+
     for (let i = 0; i < nums.length; i++) {
         const num = nums[i];
         if (!valueIndices.has(num)) {
@@ -17,17 +18,13 @@ function countPairs(nums: number[], k: number): number {
     let count = 0;
     
     for (const indices of valueIndices.values()) {
-
-        const remainderCount: Map<number, number> = new Map();
-        
+    
         for (let i = 0; i < indices.length; i++) {
-            const rem_i = indices[i] % k;
-            for (let j = 0; j < k; j++) {
-                if ((rem_i * j) % k === 0) {
-                    count += remainderCount.get(j) || 0;
+            for (let j = i + 1; j < indices.length; j++) {
+                if ((indices[i] * indices[j]) % k === 0) {
+                    count++;
                 }
             }
-            remainderCount.set(rem_i, (remainderCount.get(rem_i) || 0) + 1);
         }
     }
     
