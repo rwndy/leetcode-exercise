@@ -13,16 +13,22 @@
  */
 
 function hasPathSum(root: TreeNode | null, targetSum: number): boolean {
-    if (!root) return false
+    console.log('root left=>', root?.left)
+    console.log('root right =>', root?.right)
+    console.log('root val =>', root?.val)
+    if (root === null) return false
 
-    if (root.left === null && root.right === null) {
-        return root.val === targetSum
+    targetSum -= root.val
+
+    let left = root?.left
+    let right = root?.right
+
+    console.log('root left=>', left?.left)
+    console.log('root right =>', right?.right)
+
+    if (left === null && right === null) {
+        return targetSum === 0
     }
-
-    const remaining = targetSum - root.val
-
-    return (
-        hasPathSum(root.left, remaining) || hasPathSum(root.right, remaining)
-
-    )
+    
+    return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum)
 };
