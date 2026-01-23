@@ -1,17 +1,20 @@
 function isAnagram(s: string, t: string): boolean {
 
     if (s.length !== t.length) return false
-    const charCount = {}
+    const charCount = new Map()
 
     for (const char of s) {
-        charCount[char] = (charCount[char] || 0) + 1;
+        charCount.set(char, (charCount.get(char) || 0) + 1);
     }
 
     for (const char of t) {
-        if (!charCount[char]) {
+        const count = charCount.get(char);
+        
+        if (!count) {
             return false;
         }
-        charCount[char]--;
+        
+        charCount.set(char, count - 1);
     }
 
     return true
